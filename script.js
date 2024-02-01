@@ -1,69 +1,60 @@
-// Initialize global variables
 var wins = 0;
 var ties = 0;
 var losses = 0;
 
 // Array of options for computer to pick from
-var options = ['R', 'P', 'S'];
+var options = ["R", "P", "S"];
 
-var playGame = function () {
-	// TODO: Use the prompt() method to ask the user for their choice between 'R', 'P', and 'S' and store the response in a variable named 'userChoice'
-	var userChoice = prompt('Choose from R, P, or S');
-	console.log('userChoice', userChoice);
-	if (userChoice === null) {
-		return;
-	}
+var playGame = function() {
+  // Ask user for their choice
+  var userChoice = window.prompt("Enter R, P, or S:");
 
-	if (!options.includes(userChoice.toUpperCase())) {
-		alert('Please enter a valid choice next time');
-		return playGame();
-	}
+  // If user pressed Cancel, immediately end function
+  if (!userChoice) {
+    return;
+  }
 
-	userChoice = userChoice.toUpperCase();
+  // Convert to uppercase to make comparisons easier
+  userChoice = userChoice.toUpperCase();
 
-	// TODO: Randomly select an element from the array 'options' and store it in a variable named 'computerChoice' - Google for example: "How can I select a random element from an array in JavaScript?"
-	// var computerChoice = options[Math.floor(Math.random() * options.length)];
-	var randomIndex = Math.floor(Math.random() * options.length); // 0, 1, or 2
-	console.log('randomIndex', randomIndex);
-	var computerChoice = options[randomIndex];
-	console.log('computerChoice', computerChoice);
+  // Get random index from array of options
+  var index = Math.floor(Math.random() * options.length);
+  var computerChoice = options[index];
 
-	// TODO: Use the alert() method to display a message to let the user know what the computer has chosen
-	alert("Computer's choice " + computerChoice);
+  window.alert("The computer chose " + computerChoice);
 
-	// TODO:
-	/*
-  Write a conditional statement to determine the outcome:
-  - if both userChoice and computerChoice are the same, increment the variable 'ties' by 1 and use the alert() method to let the user know it's a tie
-  - else if the user has won, increment the variable 'wins' by 1 and use the alert() method to let the user know
-  - else the user lost: increment the variable 'losses' by 1 and use the alert() method to let the user know
-  */
-	if (userChoice === computerChoice) {
-		alert("It's a tie!");
-		ties++;
-	} else if (
-		(userChoice === 'R' && computerChoice === 'S') ||
-		(userChoice === 'P' && computerChoice === 'R') ||
-		(userChoice === 'S' && computerChoice === 'P')
-	) {
-		alert('You win!');
-		wins++;
-	} else {
-		alert('Computer wins!');
-		losses++;
-	}
+  // If choices are the same, it's a tie
+  if (userChoice === computerChoice) {
+    ties++;
+    window.alert("It's a tie!");
 
-	// TODO: Use the alert() method to display current 'wins', 'losses', and 'ties'
-	alert('Wins: ' + wins + '\n' + 'Losses: ' + losses + '\n' + 'Ties: ' + ties);
+  // Check every win condition for the player
+  } else if (
+    (userChoice === "R" && computerChoice === "S") || 
+    (userChoice === "P" && computerChoice === "R") || 
+    (userChoice === "S" && computerChoice === "P")
+  ) {
+    wins++;
+    window.alert("You win!");
 
-	// TODO: Use the confirm() method to ask user to play again and collect the response in a variable named 'playAgain'
-	var playAgain = confirm('Do you want to play again?');
-	console.log('playAgain', playAgain);
+  // If above conditions failed, assume player lost
+  } else {
+    losses++;
+    window.alert("You lost!");
+  }
 
-	// TODO: Run the function playGame() if 'playAgain' is true
-	if (playAgain) {
-		playGame();
-	}
+  // Print stats with line breaks
+  window.alert(
+    "Stats:\nWins: " + wins + "\nLosses: " + losses + "\nTies: " + ties
+  );
+
+  // Ask user to play again
+  var playAgain = window.confirm("Play again?");
+
+  // If user pressed OK, run the function again
+  if (playAgain) {
+    playGame();
+  }
 };
 
 // Run the game for the first time
