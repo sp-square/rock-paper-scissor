@@ -1,7 +1,7 @@
 // Initialize global variables
 var wins = 0;
 var ties = 0;
-var loss = 0;
+var losses = 0;
 
 // Array of options for computer to pick from
 var options = ['R', 'P', 'S'];
